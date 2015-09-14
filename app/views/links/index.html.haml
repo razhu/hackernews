@@ -12,7 +12,7 @@
         %td= link.title
         %td= link.url
         %td= link_to 'Show', link
-        - if user_signed_in? && current_user?
+        - if user_signed_in?
           %td= link_to 'Edit', edit_link_path(link)
           %td= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' }
 %br
