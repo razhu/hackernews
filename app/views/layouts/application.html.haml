@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %title Hackernews
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    / <p class="notice"><haml:loud> notice </haml:loud></p>
+    / <p class="alert"><haml:loud> alert </haml:loud></p>
+    - flash.each do |name, msg|
+      = content_tag(:div, msg, class: "alert alert-#{name}")
+    - if user_signed_in?
+      %ul
+        %li
+          = link_to "Sign Out", destroy_user_session_path, :method => :delete
+        %li
+          = link_to "add link", new_link_path
+        %li
+          = link_to "account settings", edit_user_registration_path
+    - else
+      %ul
+        %li
+          = link_to "Login", new_user_session_path
+        %li
+          = link_to "SignUp", new_user_registration_path
+    = yield
